@@ -72,7 +72,7 @@ const App = () => {
     const newOrder = {
       name: formValues.name.trim(),
       size: formValues.size,
-      toppings: ["cheese, pepperoni, mushroom, ham"].filter(
+      toppings: ["cheese", "pepperoni", "mushroom", "ham"].filter(
         (item) => formValues[item]
       ),
       special: formValues.special.trim(),
