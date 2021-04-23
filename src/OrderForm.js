@@ -15,7 +15,7 @@ export default function OrderForm({ values, submit, change, disabled, errors }) 
     return (
         <form id='pizza-form' onSubmit={onSubmit}>
             <div className='first-input'>
-                <h2>Place your Order</h2>
+                <h2>Build your Pizza</h2>
                 <div className="errors">
                     <div>{errors.name}</div>
                     <div>{errors.size}</div>
@@ -32,6 +32,7 @@ export default function OrderForm({ values, submit, change, disabled, errors }) 
             </div>
 
             <div className="dropdown">
+                <h3>Selcet a Size</h3>
                 <label>Size
                     <select id='size-dropdown'
                       value={values.size}
@@ -46,6 +47,7 @@ export default function OrderForm({ values, submit, change, disabled, errors }) 
             </div>
 
             <div className="checkboxes">
+                <h3>Choose your Toppings:</h3>
                 <label>
                     Cheese
                     <input
@@ -85,7 +87,8 @@ export default function OrderForm({ values, submit, change, disabled, errors }) 
             </div>
 
             <div className="second-input">
-                <label>Special Instructions
+                <h3>Special Instructions</h3>
+                <label>
                     <input id='special-text'
                       type="text"
                       value={values.special}
@@ -97,6 +100,7 @@ export default function OrderForm({ values, submit, change, disabled, errors }) 
             </div>
 
             <div>
+                <h3>Place your Order!</h3>
                 <button id="order-button"disabled={disabled}>Add to Order</button>
             </div>
         </form>
