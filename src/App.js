@@ -3,15 +3,27 @@ import { Route, Link, Switch } from 'react-router-dom';
 
 //Components imports
 import Home from './Home';
+import OrderForm from './OrderForm';
 
 const App = () => {
   return (
     <div className='App'>
       <nav>
         <h1 className='shop-header'>Lambda Eats</h1>
-        <p>You can remove this code and create your own header</p>
+        <div className='nav-links'>
+          <Link to='/'>Home</Link>
+          <Link to='/pizza' id='order-pizza'>Order</Link>
+        </div>
       </nav>
-      <Home />
+
+      <Switch>
+        <Route path='/pizza'>
+          <OrderForm />
+        </Route>
+        <Route path='/'>
+          <Home />
+        </Route>
+      </Switch>
     </div>
   );
 };
