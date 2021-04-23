@@ -33,7 +33,7 @@ export default function OrderForm({ values, submit, change, disabled, errors }) 
 
             <div className="dropdown">
                 <h3>Selcet a Size</h3>
-                <label>Size
+                <label>
                     <select id='size-dropdown'
                       value={values.size}
                       name="size"
