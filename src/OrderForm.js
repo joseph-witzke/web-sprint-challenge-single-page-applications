@@ -1,14 +1,30 @@
 import React from 'react';
 
-export default function OrderForm() {
+export default function OrderForm({ values, submit, change, disabled, errors }) {
+
+    const onSubmit = (event) => {
+        event.preventDefault();
+        submit();
+    }
+
+    const onChange = (event) => {
+        const { name, value, checked, type } = event.target;
+        const valueToUse = type === "checkbox" ? checked: value;
+        change(name, valueToUse)
+    }
     return (
-        <form id='pizza-form'>
+        <form id='pizza-form' onSubmit={onSubmit}>
             <div className='first-input'>
-                <label>Name
+                <h2>Place your Order</h2>
+                <div className="errors">
+                    <div>{errors.name}</div>
+                    <div>{errors.size}</div>
+                </div>
+                <label>Name&nbsp;
                     <input id='name-input'
                       type="text"
-                      value=""
-                      onChange=""
+                      value={values.name}
+                      onChange={onChange}
                       name="name"
                       placeholder="Enter name here..."
                     />
@@ -18,13 +34,13 @@ export default function OrderForm() {
             <div className="dropdown">
                 <label>Size
                     <select id='size-dropdown'
-                      value=""
+                      value={values.size}
                       name="size"
-                      onChange="">
+                      onChange={onChange}>
                         <option value="">--Select Size--</option>
-                        <option value="Small">Small</option>
-                        <option value="Medium">Medium</option>
-                        <option value="Large">Large</option>
+                        <option value="small">Small</option>
+                        <option value="medium">Medium</option>
+                        <option value="large">Large</option>
                     </select>
                 </label>
             </div>
@@ -35,8 +51,8 @@ export default function OrderForm() {
                     <input
                       type="checkbox"
                       name="cheese"
-                      checked=""
-                      onChange=""
+                      checked={values.cheese}
+                      onChange={onChange}
                     />
                 </label>
                 <label>
@@ -44,8 +60,8 @@ export default function OrderForm() {
                     <input
                       type="checkbox"
                       name="pepperoni"
-                      checked=""
-                      onChange=""
+                      checked={values.pepperoni}
+                      onChange={onChange}
                     />
                 </label>
                 <label>
@@ -53,17 +69,17 @@ export default function OrderForm() {
                     <input
                       type="checkbox"
                       name="mushroom"
-                      checked=""
-                      onChange=""
+                      checked={values.mushroom}
+                      onChange={onChange}
                     />
                 </label>
                 <label>
                     Ham
                     <input
                       type="checkbox"
-                      name="hame"
-                      checked=""
-                      onChange=""
+                      name="ham"
+                      checked={values.ham}
+                      onChange={onChange}
                     />
                 </label>
             </div>
@@ -72,8 +88,8 @@ export default function OrderForm() {
                 <label>Special Instructions
                     <input id='special-text'
                       type="text"
-                      value=""
-                      onChange=""
+                      value={values.special}
+                      onChange={onChange}
                       name="special"
                       placeholder="Anything else?"
                     />
@@ -81,7 +97,7 @@ export default function OrderForm() {
             </div>
 
             <div>
-                <button id="order-button"disabled="">Add to Order</button>
+                <button id="order-button"disabled={disabled}>Add to Order</button>
             </div>
         </form>
     )

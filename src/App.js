@@ -7,6 +7,7 @@ import schema from "./formSchema"
 //Components imports
 import Home from './Home';
 import OrderForm from './OrderForm';
+import Pizza from './Pizza';
 
 //Shape of state for form
 const initialFormValues = {
@@ -21,6 +22,7 @@ const initialFormValues = {
 
 const initialFormErrors = {
   name: "",
+  size: "",
 };
 const initialOrders = [];
 const initialDisabled = true;
@@ -43,9 +45,28 @@ const App = () => {
     });
   }
 
-  const inputChange = () => {
+  const inputChange = (name, value) => {
+    yup
+      .reach(schema, name)
+      .validate(value)
+      .then(() => {
+        setFormErrors({
+          ...formErrors,
+          [name]: "",
+        });
+      })
+      .catch((err) => {
+        setFormErrors({
+          ...formErrors,
+          [name]: err.errors[0],
+        });
+      });
 
-  }
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    });
+  };
 
   const formSubmit = () => {
     const newOrder = {
@@ -60,6 +81,12 @@ const App = () => {
   };
 
   //Side Effects
+  useEffect(() => {
+    schema.isValid(formValues).then((valid) => {
+      setDisabled(!valid);
+    });
+  }, [formValues]);
+
 
   return (
     <div className='App'>
@@ -85,6 +112,10 @@ const App = () => {
           <Home />
         </Route>
       </Switch>
+
+      {orders.map((order) => {
+        return <Pizza key={order.id} details={order} />;
+      })}
     </div>
   );
 };
