@@ -10,6 +10,7 @@ import OrderForm from './OrderForm';
 import Pizza from './Pizza';
 
 //Shape of state for form
+//small change
 const initialFormValues = {
   name: "",
   size: "",
